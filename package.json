@@ -1,7 +1,7 @@
 {
   "name": "cheeseswap-subgraph",
-  "version": "1.0.0",
-  "repository": "https://github.com/cheesemakerfarm/cheesegraph",
+  "version": "1.0.1",
+  "repository": "https://github.com/cheeseswapbsc/cheesegraph",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "codegen": "graph codegen --output-dir src/types/",
