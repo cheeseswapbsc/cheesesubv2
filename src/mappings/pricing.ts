@@ -48,11 +48,14 @@ let WHITELIST: string[] = [
   '0x5ea29eee799aa7cc379fde5cf370bc24f2ea7c81',
   '0xadd8a06fd58761a5047426e160b2b88ad3b9d464',
   '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-  '0x2cc26dd730f548dc4ac291ae7d84a0c96980d2cb'
+  '0x2cc26dd730f548dc4ac291ae7d84a0c96980d2cb',
+  '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+  '0x5b4963b964bac5c2db83e53fffe46e0cb83a1346',
+  '0x3d29cdb00cb183a0aeceea4fb73f55e1450af3d4'
   ]
 
 
-let MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('5000')
+let MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('500')
 
 
 let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('2')

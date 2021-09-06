@@ -9,7 +9,7 @@
     "create-local": "graph create blockartist/cheesegraph3 --node http://127.0.0.1:8020",
     "deploy-local": "graph deploy blockartist/cheesegraph3 --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
     "remove-local": "graph remove --node http://localhost:8020/ blockartist/cheesegraph3",
-    "deploy": "graph deploy --debug --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/  blockartist/cheesegraph",
+    "deploy": "graph deploy --debug --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/  blockartist/cheesesub",
     "deploy-staging": "graph deploy $THE_GRAPH_GITHUB_USER/$THE_GRAPH_SUBGRAPH_NAME /cheeseswap3 --ipfs https://api.staging.thegraph.com/ipfs/ --node https://subgraph.kiwiswap.finance/deploy/",
     "watch-local": "graph deploy blockartist/cheesegraph3 --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
   },
