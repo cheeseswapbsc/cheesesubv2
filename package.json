@@ -1,6 +1,6 @@
 {
   "name": "cheeseswap-subgraph",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": "https://github.com/cheeseswapbsc/cheesesubv2",
   "license": "GPL-3.0-or-later",
   "scripts": {
@@ -14,13 +14,13 @@
     "watch-local": "graph deploy blockartist/cheesegraph3 --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.20.0",
-    "@graphprotocol/graph-ts": "^0.20.0",
+    "@graphprotocol/graph-cli": "^0.17.1",
+    "@graphprotocol/graph-ts": "0.17.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "^6.2.2",
     "eslint-config-prettier": "^6.1.0",
     "prettier": "^1.18.2",
-    "typescript": "^4.1.4"
+    "typescript": "^3.8.0"
   }
 }

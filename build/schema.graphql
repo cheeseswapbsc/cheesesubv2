@@ -1,0 +1,203 @@
+type UniswapFactory @entity {
+  id: ID!
+  pairCount: Int!
+  totalVolumeUSD: BigDecimal!
+  totalVolumeETH: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  totalLiquidityUSD: BigDecimal!
+  totalLiquidityETH: BigDecimal!
+  txCount: BigInt!
+  mostLiquidTokens: [TokenDayData!]!
+}
+
+type Token @entity {
+  id: ID!
+  symbol: String!
+  name: String!
+  decimals: BigInt!
+  totalSupply: BigInt!
+  tradeVolume: BigDecimal!
+  tradeVolumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  txCount: BigInt!
+  totalLiquidity: BigDecimal!
+  derivedETH: BigDecimal
+  mostLiquidPairs: [PairDayData]!
+}
+
+type Pair @entity {
+  id: ID!
+  token0: Token!
+  token1: Token!
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+  totalSupply: BigDecimal!
+  reserveETH: BigDecimal!
+  reserveUSD: BigDecimal!
+  trackedReserveETH: BigDecimal!
+  token0Price: BigDecimal!
+  token1Price: BigDecimal!
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  txCount: BigInt!
+  createdAtTimestamp: BigInt!
+  createdAtBlockNumber: BigInt!
+  liquidityProviderCount: BigInt!
+}
+
+type User @entity {
+  id: ID!
+  liquidityPositions: [LiquidityPosition!] @derivedFrom(field: "user")
+  usdSwapped: BigDecimal!
+}
+
+type LiquidityPosition @entity {
+  id: ID!
+  user: User!
+  pair: Pair!
+  liquidityTokenBalance: BigDecimal!
+  historicalSnapshots: [LiquidityPositionSnapshot]!
+}
+
+
+type LiquidityPositionSnapshot @entity {
+  id: ID!
+  liquidityPosition: LiquidityPosition! @derivedFrom(field: "historicalSnapshots")
+  timestamp: Int!
+  block: Int!
+  user: User!
+  pair: Pair!
+  token0PriceUSD: BigDecimal!
+  token1PriceUSD: BigDecimal!
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+  reserveUSD: BigDecimal!
+  liquidityTokenTotalSupply: BigDecimal!
+  liquidityTokenBalance: BigDecimal!
+}
+
+type Transaction @entity {
+  id: ID! # txn hash
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  mints: [Mint]!
+  burns: [Burn]!
+  swaps: [Swap]!
+}
+
+type Mint @entity {
+  id: ID!
+  transaction: Transaction! @derivedFrom(field: "mints")
+  timestamp: BigInt!
+  pair: Pair!
+  to: Bytes!
+  liquidity: BigDecimal!
+  sender: Bytes
+  amount0: BigDecimal
+  amount1: BigDecimal
+  logIndex: BigInt
+  amountUSD: BigDecimal
+  feeTo: Bytes
+  feeLiquidity: BigDecimal
+}
+
+type Burn @entity {
+  id: ID!
+  transaction: Transaction! @derivedFrom(field: "burns")
+  timestamp: BigInt!
+  pair: Pair!
+  liquidity: BigDecimal!
+  sender: Bytes
+  amount0: BigDecimal
+  amount1: BigDecimal
+  to: Bytes
+  logIndex: BigInt
+  amountUSD: BigDecimal
+  needsComplete: Boolean!
+  feeTo: Bytes
+  feeLiquidity: BigDecimal
+}
+
+type Swap @entity {
+  id: ID!
+  transaction: Transaction! @derivedFrom(field: "swaps")
+  timestamp: BigInt!
+  pair: Pair!
+  sender: Bytes!
+  from: Bytes!
+  amount0In: BigDecimal!
+  amount1In: BigDecimal!
+  amount0Out: BigDecimal!
+  amount1Out: BigDecimal!
+  to: Bytes!
+  logIndex: BigInt
+  amountUSD: BigDecimal!
+}
+type Bundle @entity {
+  id: ID!
+  ethPrice: BigDecimal! # price of ETH usd
+}
+
+
+type UniswapDayData @entity {
+  id: ID!
+  date: Int!
+  dailyVolumeETH: BigDecimal!
+  dailyVolumeUSD: BigDecimal!
+  dailyVolumeUntracked: BigDecimal!
+  totalVolumeETH: BigDecimal!
+  totalLiquidityETH: BigDecimal!
+  totalVolumeUSD: BigDecimal!
+  totalLiquidityUSD: BigDecimal!
+  maxStored: Int
+  mostLiquidTokens: [TokenDayData!]!
+  txCount: BigInt!
+}
+
+type PairHourData @entity {
+  id: ID!
+  hourStartUnix: Int!
+  pair: Pair!
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+  reserveUSD: BigDecimal!
+  hourlyVolumeToken0: BigDecimal!
+  hourlyVolumeToken1: BigDecimal!
+  hourlyVolumeUSD: BigDecimal!
+  hourlyTxns: BigInt!
+}
+
+
+type PairDayData @entity {
+  id: ID!
+  date: Int!
+  pairAddress: Bytes!
+  token0: Token!
+  token1: Token!
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+  totalSupply: BigDecimal!
+  reserveUSD: BigDecimal!
+  dailyVolumeToken0: BigDecimal!
+  dailyVolumeToken1: BigDecimal!
+  dailyVolumeUSD: BigDecimal!
+  dailyTxns: BigInt!
+}
+
+type TokenDayData @entity {
+  id: ID!
+  date: Int!
+  token: Token!
+  dailyVolumeToken: BigDecimal!
+  dailyVolumeETH: BigDecimal!
+  dailyVolumeUSD: BigDecimal!
+  dailyTxns: BigInt!
+  totalLiquidityToken: BigDecimal!
+  totalLiquidityETH: BigDecimal!
+  totalLiquidityUSD: BigDecimal!
+  priceUSD: BigDecimal!
+  maxStored: Int!
+  mostLiquidPairs: [PairDayData!]!
+}
