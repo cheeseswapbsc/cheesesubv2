@@ -3,11 +3,10 @@ import { Pair, Token, Bundle } from '../../generated/schema'
 import { BigDecimal, Address, BigInt } from '@graphprotocol/graph-ts/index'
 import { ZERO_BD, factoryContract, ADDRESS_ZERO, ONE_BD } from './helpers'
 
-const WETH_ADDRESS = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
-const USDC_WETH_PAIR = '0x578e8CEc62666D2750D92EcC70bE0961FF3Ab269'
-const DAI_WETH_PAIR = '0x89D20Dcda1DC49F47BcDA00C3b84Fe30AC3d127b'
-const USDT_WETH_PAIR = '0xcfD63197d764cd70d07bB607e6367Ae0E869BaDD'
-
+const WETH_ADDRESS = '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c'
+const USDC_WETH_PAIR = '0x578e8cec62666d2750d92ecc70be0961ff3ab269'
+const DAI_WETH_PAIR = '0x89d20dcda1dc49f47bcda00c3b84fe30ac3d127b'
+const USDT_WETH_PAIR = '0xcfd63197d764cd70d07bb607e6367ae0e869badd'
 
 export function getEthPriceInUSD(): BigDecimal {
   // fetch eth prices for each stablecoin
@@ -55,7 +54,7 @@ let WHITELIST: string[] = [
   ]
 
 
-let MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('50')
+let MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('500')
 
 
 let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('1')

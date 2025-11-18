@@ -1,6 +1,6 @@
 {
   "name": "cheeseswapdata",
-  "version": "2.1.2",
+  "version": "2.2.2",
   "repository": "https://github.com/cheeseswapbsc/cheesesubv2",
   "license": "GPL-3.0-or-later",
   "scripts": {
@@ -14,14 +14,14 @@
     "watch-local": "graph deploy blockartist/cheesegraph3 --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "0.50.0",
-    "@graphprotocol/graph-ts": "0.30.0"
+    "@graphprotocol/graph-cli": "^0.69.0",
+    "@graphprotocol/graph-ts": "^0.35.0"
   },
-  "resolutions": {
+ "resolutions": {
     "glob": "7.2.3",
     "libp2p-crypto-secp256k1": "0.3.1",
     "multihashing-async": "0.5.1",
     "concat-stream": "^1.6.2"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+ "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

@@ -7,7 +7,7 @@ import { User, Bundle, Token, LiquidityPosition, LiquidityPositionSnapshot, Pair
 import { Factory as FactoryContract } from '../../generated/templates/Pair/Factory'
 
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
-export const FACTORY_ADDRESS = '0xdd538E4Fd1b69B7863E1F741213276A6Cf1EfB3B'
+export const FACTORY_ADDRESS = '0xdd538e4fd1b69b7863e1f741213276a6cf1efb3b'
 
 export let ZERO_BI = BigInt.fromI32(0)
 export let ONE_BI = BigInt.fromI32(1)
@@ -82,7 +82,7 @@ export function fetchTokenSymbol(tokenAddress: Address): string {
 
 export function fetchTokenName(tokenAddress: Address): string {
   // hard coded override
-  if (tokenAddress.toHexString() == '0x779859313567B96d5d3fb7f531b73E1BF008C4A9') {
+  if (tokenAddress.toHexString() == '0x779859313567b96d5d3fb7f531b73e1bf008c4a9') {
     return 'KPOP'
   }
 
