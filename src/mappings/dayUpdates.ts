@@ -15,7 +15,7 @@ export function updateUniswapDayData(event: ethereum.Event): void {
   let dayStartTimestamp = dayID * 86400
   let uniswapDayData = UniswapDayData.load(dayID.toString())
   if (uniswapDayData == null) {
-    let uniswapDayData = new UniswapDayData(dayID.toString())
+    uniswapDayData = new UniswapDayData(dayID.toString())
     uniswapDayData.date = dayStartTimestamp
     uniswapDayData.dailyVolumeUSD = ZERO_BD
     uniswapDayData.dailyVolumeETH = ZERO_BD
@@ -29,7 +29,6 @@ export function updateUniswapDayData(event: ethereum.Event): void {
     uniswapDayData.txCount = ZERO_BI
     uniswapDayData.save()
   }
-  uniswapDayData = UniswapDayData.load(dayID.toString())!
   uniswapDayData.totalLiquidityUSD = uniswap!.totalLiquidityUSD
   uniswapDayData.totalLiquidityETH = uniswap!.totalLiquidityETH
   uniswapDayData.txCount = uniswap!.txCount
@@ -44,11 +43,10 @@ export function updatePairDayData(event: ethereum.Event): void {
     .toHexString()
     .concat('-')
     .concat(BigInt.fromI32(dayID).toString())
-  let pair = Pair.load(event.address.toHexString())
+  let pair = Pair.load(event.address.toHexString())!
   let pairDayData = PairDayData.load(dayPairID)
   if (pairDayData == null) {
-    let pairDayData = new PairDayData(dayPairID)
-    let pair = Pair.load(event.address.toHexString())!
+    pairDayData = new PairDayData(dayPairID)
     pairDayData.totalSupply = pair.totalSupply
     pairDayData.date = dayStartTimestamp
     pairDayData.token0 = pair.token0
@@ -63,11 +61,10 @@ export function updatePairDayData(event: ethereum.Event): void {
     pairDayData.dailyTxns = ZERO_BI
     pairDayData.save()
   }
-  pairDayData = PairDayData.load(dayPairID)!
-  pairDayData.totalSupply = pair!.totalSupply
-  pairDayData.reserve0 = pair!.reserve0
-  pairDayData.reserve1 = pair!.reserve1
-  pairDayData.reserveUSD = pair!.reserveUSD
+  pairDayData.totalSupply = pair.totalSupply
+  pairDayData.reserve0 = pair.reserve0
+  pairDayData.reserve1 = pair.reserve1
+  pairDayData.reserveUSD = pair.reserveUSD
   pairDayData.dailyTxns = pairDayData.dailyTxns.plus(ONE_BI)
   pairDayData.save()
 }
@@ -80,10 +77,10 @@ export function updatePairHourData(event: ethereum.Event): void {
     .toHexString()
     .concat('-')
     .concat(BigInt.fromI32(hourIndex).toString())
-  let pair = Pair.load(event.address.toHexString())
+  let pair = Pair.load(event.address.toHexString())!
   let pairHourData = PairHourData.load(hourPairID)
   if (pairHourData == null) {
-    let pairHourData = new PairHourData(hourPairID)
+    pairHourData = new PairHourData(hourPairID)
     pairHourData.hourStartUnix = hourStartUnix
     pairHourData.pair = event.address.toHexString()
     pairHourData.reserve0 = ZERO_BD
@@ -95,10 +92,9 @@ export function updatePairHourData(event: ethereum.Event): void {
     pairHourData.hourlyTxns = ZERO_BI
     pairHourData.save()
   }
-  pairHourData = PairHourData.load(hourPairID)!
-  pairHourData.reserve0 = pair!.reserve0
-  pairHourData.reserve1 = pair!.reserve1
-  pairHourData.reserveUSD = pair!.reserveUSD
+  pairHourData.reserve0 = pair.reserve0
+  pairHourData.reserve1 = pair.reserve1
+  pairHourData.reserveUSD = pair.reserveUSD
   pairHourData.hourlyTxns = pairHourData.hourlyTxns.plus(ONE_BI)
   pairHourData.save()
 }
@@ -115,7 +111,7 @@ export function updateTokenDayData(token: Token, event: ethereum.Event): void {
 
   let tokenDayData = TokenDayData.load(tokenDayID)
   if (tokenDayData == null) {
-    let tokenDayData = new TokenDayData(tokenDayID)
+    tokenDayData = new TokenDayData(tokenDayID)
     tokenDayData.date = dayStartTimestamp
     tokenDayData.token = token.id
     tokenDayData.priceUSD = token.derivedETH!.times(bundle!.ethPrice)
@@ -130,7 +126,6 @@ export function updateTokenDayData(token: Token, event: ethereum.Event): void {
     tokenDayData.mostLiquidPairs = token.mostLiquidPairs
     tokenDayData.save()
   }
-  tokenDayData = TokenDayData.load(tokenDayID)!
   tokenDayData.priceUSD = token.derivedETH!.times(bundle!.ethPrice)
   tokenDayData.totalLiquidityToken = token.totalLiquidity
   tokenDayData.totalLiquidityETH = token.totalLiquidity.times(token.derivedETH as BigDecimal)

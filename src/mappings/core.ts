@@ -1,6 +1,6 @@
 import { PairHourData } from '../../generated/schema'
 /* eslint-disable prefer-const */
-import { BigInt, BigDecimal, store, Address } from '@graphprotocol/graph-ts'
+import { BigInt, BigDecimal, store, Address, Bytes } from '@graphprotocol/graph-ts'
 import {
   Pair,
   Token,
@@ -310,7 +310,7 @@ export function handleMint(event: Mint): void {
   mint.save()
 
   // update the LP position
-  let liquidityPosition = createLiquidityPosition(event.address, mint.to as Address)
+  let liquidityPosition = createLiquidityPosition(event.address, Address.fromBytes(mint.to))
   createLiquiditySnapshot(liquidityPosition, event)
 
   // update day entities
@@ -366,8 +366,10 @@ export function handleBurn(event: Burn): void {
   burn.save()
 
   // update the LP position
-  let liquidityPosition = createLiquidityPosition(event.address, burn.sender as Address)
-  createLiquiditySnapshot(liquidityPosition, event)
+  if (burn.sender !== null) {
+    let liquidityPosition = createLiquidityPosition(event.address, Address.fromBytes(burn.sender as Bytes))
+    createLiquiditySnapshot(liquidityPosition, event)
+  }
 
   // update day entities
   updatePairDayData(event)
